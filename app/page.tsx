@@ -1,5 +1,4 @@
 import Link from "next/link";
-import VirtualTryOn from "./virtualtryon";
 export default function Home() {
   return (
     <div className="bg-gradient-to-br from-pink-50 to-purple-50 min-h-screen flex flex-col">
@@ -23,11 +22,12 @@ export default function Home() {
     <Link href="/generator" className="text-purple-700 hover:text-pink-500 px-3 py-2 rounded-md text-sm font-medium transition-colors">
       Outfit Generator
     </Link>
+
 <Link 
-  href="/virtualtryon" 
-  className="text-purple-700 hover:text-pink-500 px-3 py-2 rounded-md text-sm font-medium transition-colors"
+href="/virtualtryon" 
+className="text-purple-700 hover:text-pink-500 px-3 py-2 rounded-md text-sm font-medium transition-colors"
 >
-  Virtual Try-On
+Virtual Try-On
 </Link>
     <Link href="/chatbot" className="text-purple-700 hover:text-pink-500 px-3 py-2 rounded-md text-sm font-medium transition-colors">
       Fashion Chatbot

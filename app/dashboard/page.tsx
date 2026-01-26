@@ -111,46 +111,38 @@ export default function Dashboard() {
           <div className="flex justify-between items-center h-16">
             {/* Logo */}
             <div className="flex-shrink-0 flex items-center">
-              <Link href="/" className="text-2xl font-bold bg-gradient-to-r from-pink-500 to-purple-600 bg-clip-text text-transparent">
+              <span className="text-2xl font-bold bg-gradient-to-r from-pink-500 to-purple-600 bg-clip-text text-transparent">
                 MuseWardrobe
-              </Link>
+              </span>
             </div>
 
             {/* Navigation Links */}
             <div className="hidden md:block">
-              <div className="ml-10 flex items-baseline space-x-8">
-                <Link 
-                  href="/" 
-                  className="text-purple-700 hover:text-pink-500 px-3 py-2 rounded-md text-sm font-medium transition-colors"
-                >
-                  Home
-                </Link>
-                <Link 
-                  href="/generator" 
-                  className="text-purple-700 hover:text-pink-500 px-3 py-2 rounded-md text-sm font-medium transition-colors"
-                >
-                  Outfit Generator
-                </Link>
-                <Link 
-                  href="/chatbot" 
-                  className="text-purple-700 hover:text-pink-500 px-3 py-2 rounded-md text-sm font-medium transition-colors"
-                >
-                  Fashion Chatbot
-                </Link>
-                <Link 
-                  href="/dashboard" 
-                  className="text-pink-600 font-semibold px-3 py-2 rounded-md text-sm font-medium transition-colors"
-                >
-                  Dashboard
-                </Link>
-                <Link 
-                  href="/about" 
-                  className="text-purple-700 hover:text-pink-500 px-3 py-2 rounded-md text-sm font-medium transition-colors"
-                >
-                  About
-                </Link>
-              </div>
-            </div>
+  <div className="ml-10 flex items-baseline space-x-8">
+    <Link href="/" className="text-purple-700 hover:text-pink-500 px-3 py-2 rounded-md text-sm font-medium transition-colors">
+      Home
+    </Link>
+    <Link href="/generator" className="text-purple-700 hover:text-pink-500 px-3 py-2 rounded-md text-sm font-medium transition-colors">
+      Outfit Generator
+    </Link>
+
+<Link 
+href="/virtualtryon" 
+className="text-purple-700 hover:text-pink-500 px-3 py-2 rounded-md text-sm font-medium transition-colors"
+>
+Virtual Try-On
+</Link>
+    <Link href="/chatbot" className="text-purple-700 hover:text-pink-500 px-3 py-2 rounded-md text-sm font-medium transition-colors">
+      Fashion Chatbot
+    </Link>
+    <Link href="/dashboard" className="text-purple-700 hover:text-pink-500 px-3 py-2 rounded-md text-sm font-medium transition-colors">
+      Dashboard
+    </Link>
+    <Link href="/about" className="text-purple-700 hover:text-pink-500 px-3 py-2 rounded-md text-sm font-medium transition-colors">
+      About
+    </Link>
+  </div>
+</div>
 
             {/* Login Button */}
             <div className="flex items-center">
@@ -181,7 +173,7 @@ export default function Dashboard() {
         </div>
 
         {/* Mobile menu */}
-        <div className="md:hidden hidden" id="mobile-menu">
+        <div className="md:hidden" id="mobile-menu">
           <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3 bg-white/95 backdrop-blur-md border-b border-pink-100">
             <Link 
               href="/" 
@@ -203,7 +195,7 @@ export default function Dashboard() {
             </Link>
             <Link 
               href="/dashboard" 
-              className="text-pink-600 font-semibold block px-3 py-2 rounded-md text-base font-medium"
+              className="text-purple-700 hover:text-pink-500 block px-3 py-2 rounded-md text-base font-medium"
             >
               Dashboard
             </Link>
