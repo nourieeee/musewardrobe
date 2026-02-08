@@ -1,4 +1,4 @@
-// services/ai.ts — OpenAI via Next.js API (NO Gemini, NO Demo Mode)
+// services/ai.ts — OpenAI client (SAFE & CLEAN)
 
 export async function askRealFashionAI(
   message: string
@@ -12,11 +12,7 @@ export async function askRealFashionAI(
       body: JSON.stringify({ message }),
     });
 
-    if (!res.ok) {
-      throw new Error("Failed to fetch AI response");
-    }
-
-    const data: { reply?: string } = await res.json();
+    const data = await res.json();
 
     return data.reply ?? "👗 No fashion advice received.";
   } catch (error) {

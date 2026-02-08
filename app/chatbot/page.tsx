@@ -14,7 +14,8 @@ export default function FashionChatbotPage() {
   ]);
   const [input, setInput] = useState("");
   const [loading, setLoading] = useState(false);
-  const messagesEndRef = useRef(null);
+ const messagesEndRef = useRef<HTMLDivElement | null>(null);
+
 
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
@@ -24,7 +25,8 @@ export default function FashionChatbotPage() {
     scrollToBottom();
   }, [messages]);
 
-  const handleSend = async (e) => {
+ const handleSend = async (e: React.FormEvent) => {
+
     e.preventDefault();
     if (!input.trim() || loading) return;
 
@@ -210,8 +212,8 @@ export default function FashionChatbotPage() {
               </button>
             </form>
             <p className="text-xs text-gray-500 mt-3 text-center">
-              ✨ Powered by Google Gemini AI • Real-time fashion advice
-            </p>
+  ✨ Powered by OpenAI • Real-time fashion advice
+</p>
           </div>
         </div>
 
