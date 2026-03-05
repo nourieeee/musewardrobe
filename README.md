@@ -1,36 +1,34 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# MuseWardrobe 👗✨
 
-## Getting Started
+MuseWardrobe is an **AI-powered fashion assistant** that helps users create outfits using their wardrobe items.  
+The system uses **Artificial Intelligence** to suggest outfit combinations and helps users manage their clothing digitally.
 
-First, run the development server:
+## 🚀 Features
+- AI-generated outfit suggestions
+- Wardrobe management system
+- Firebase authentication and database
+- Upload and organize clothing items
+- Smart outfit recommendations
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## 🛠 Technologies Used
+- Next.js
+- TypeScript
+- Firebase
+- Tailwind CSS
+- AI API Integration
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 📂 Project Structure
+- **app/** – Main application pages
+- **lib/** – Utility and helper functions
+- **services/** – AI services and external integrations
+- **public/** – Static files and assets
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## 🎯 Project Purpose
+This project was developed as a **college software development project** to explore how **Artificial Intelligence can assist in fashion styling and wardrobe management**.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## 👩‍💻 Contributors
+- Ayisha Nourin
+- Team Members
 
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## 📌 Repository Link
+https://github.com/nourieeee/musewardrobe
