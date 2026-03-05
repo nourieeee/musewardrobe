@@ -1,59 +1,47 @@
-import { NextResponse } from "next/server";
-
 export async function POST(req) {
   try {
-    const { fabric, color, style, occasion, bodyType } = await req.json();
+    const body = await req.json();
 
-    // 1️⃣ Build AI prompt from user inputs
     const prompt = `
-    Fashion outfit for a ${bodyType} body type.
-    Fabric: ${fabric}.
-    Color: ${color}.
-    Style: ${style}.
-    Occasion: ${occasion}.
-    High-quality fashion photography, full outfit, studio lighting.
+    Fashion outfit, ${body.color} ${body.fabric} clothing,
+    ${body.style} style, for ${body.occasion},
+    body type ${body.bodyType},
+    high quality fashion photography
     `;
 
-    console.log("Generated prompt:", prompt);
+    const response = await fetch(
+      "https://router.huggingface.co/hf-inference/models/stabilityai/stable-diffusion-xl-base-1.0",
+      {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${process.env.HUGGINGFACE_API_KEY}`,
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          inputs: prompt,
+          options: { wait_for_model: true } // important
+        }),
+      }
+    );
 
-    // 2️⃣ Call DeepAI Text-to-Image API
-    const response = await fetch("https://api.deepai.org/api/text2img", {
-      method: "POST",
-      headers: {
-        "Api-Key": process.env.DEEPAI_API_KEY,
-      },
-      body: new URLSearchParams({
-        text: prompt,
-      }),
-    });
+    console.log("Status:", response.status);
 
-    const data = await response.json();
+    const contentType = response.headers.get("content-type");
 
-    // 3️⃣ Safety fallback (VERY IMPORTANT for free AI)
-    if (!data || !data.output_url) {
-      console.warn("DeepAI failed, using placeholder image");
-      return NextResponse.json({
-        imageUrl: "/outfit-placeholder.png",
-        prompt,
-      });
+    if (!contentType || !contentType.includes("image")) {
+      const text = await response.text();
+      console.log("HF ERROR:", text);
+      return new Response("Failed to generate image", { status: 500 });
     }
 
-    // 4️⃣ Return AI-generated image URL
-    return NextResponse.json({
-      imageUrl: data.output_url,
-      prompt,
+    const image = await response.arrayBuffer();
+
+    return new Response(image, {
+      headers: { "Content-Type": "image/png" },
     });
 
   } catch (error) {
-    console.error("API ERROR:", error);
-
-    // Final fallback to avoid frontend crash
-    return NextResponse.json(
-      {
-        imageUrl: "/outfit-placeholder.png",
-        error: "AI image generation failed",
-      },
-      { status: 500 }
-    );
+    console.log(error);
+    return new Response("Server error", { status: 500 });
   }
 }

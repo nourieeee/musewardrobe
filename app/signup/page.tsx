@@ -2,6 +2,9 @@
 import { useState } from "react";
 import Link from "next/link";
 import { Eye, EyeOff, Mail, Lock, User, Calendar } from "lucide-react";
+import { createUserWithEmailAndPassword } from "firebase/auth";
+import { auth } from "../lib/firebase";
+
 
 export default function SignupPage() {
   const [showPassword, setShowPassword] = useState(false);
@@ -17,16 +20,25 @@ export default function SignupPage() {
   });
 
   const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setIsLoading(true);
-    
-    // Simulate signup process
-    setTimeout(() => {
-      setIsLoading(false);
-      // Handle signup logic here
-      console.log("Signup attempted with:", formData);
-    }, 1500);
-  };
+  e.preventDefault();
+
+  setIsLoading(true);
+
+  try {
+    await createUserWithEmailAndPassword(
+      auth,
+      formData.email,
+      formData.password
+    );
+
+    alert("Account created successfully");
+
+  } catch (error: any) {
+    alert(error.message);
+  }
+
+  setIsLoading(false);
+};
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFormData({

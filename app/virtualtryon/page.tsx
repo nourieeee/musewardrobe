@@ -1,33 +1,54 @@
 "use client";
 
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import Link from "next/link";
 import { Camera, Upload, RefreshCw, Download, Plus, Minus, RotateCw, User, Sparkles } from "lucide-react";
 
 export default function VirtualTryOn() {
   const [isCameraActive, setIsCameraActive] = useState(false);
-  const [selectedClothing, setSelectedClothing] = useState("");
+  const [selectedClothing, setSelectedClothing] = useState(null);
   const [scale, setScale] = useState(1);
   const [rotation, setRotation] = useState(0);
   const [isLoading, setIsLoading] = useState(false);
   const videoRef = useRef(null);
   const canvasRef = useRef(null);
+  const [savedOutfits, setSavedOutfits] = useState([]);
 
-  // Sample clothing items
-  const clothingItems = [
-    { id: "1", name: "Floral Dress", category: "Dresses", image: "https://images.unsplash.com/photo-1595777457583-95e059d581b8?w=300&h=400&fit=crop" },
-    { id: "2", name: "Denim Jacket", category: "Jackets", image: "https://images.unsplash.com/photo-1551028719-00167b16eac5?w=300&h=400&fit=crop" },
-    { id: "3", name: "Summer Top", category: "Tops", image: "https://images.unsplash.com/photo-1576566588028-4147f3842f27?w=300&h=400&fit=crop" },
-    { id: "4", name: "Maxi Skirt", category: "Skirts", image: "https://images.unsplash.com/photo-1583496661160-fb5886a13d77?w=300&h=400&fit=crop" },
-    { id: "5", name: "Leather Jacket", category: "Jackets", image: "https://images.unsplash.com/photo-1551028719-00167b16eac5?w=300&h=400&fit=crop" },
-    { id: "6", name: "Evening Gown", category: "Dresses", image: "https://images.unsplash.com/photo-1566479179816-d8643d6d39fc?w=300&h=400&fit=crop" },
-  ];
+  useEffect(() => {
+  const stored = localStorage.getItem("savedOutfits");
+  if (stored) {
+    setSavedOutfits(JSON.parse(stored));
+  }
+}, []);
 
-  const handleCameraToggle = () => {
-    setIsCameraActive(!isCameraActive);
-    // In a real app, you would start/stop the camera stream here
-  };
+const handleCameraToggle = async () => {
+  if (!isCameraActive) {
+    try {
+      const stream = await navigator.mediaDevices.getUserMedia({
+        video: { facingMode: "user" }
+      });
 
+      if (videoRef.current) {
+        videoRef.current.srcObject = stream;
+
+        videoRef.current.onloadedmetadata = () => {
+          videoRef.current.play();
+        };
+      }
+
+      setIsCameraActive(true);
+    } catch (err) {
+      console.error("Camera error:", err);
+      alert("Camera permission denied or not working");
+    }
+  } else {
+    if (videoRef.current?.srcObject) {
+      videoRef.current.srcObject.getTracks().forEach(track => track.stop());
+      videoRef.current.srcObject = null;
+    }
+    setIsCameraActive(false);
+  }
+};
   const handleUpload = (e) => {
     const file = e.target.files[0];
     if (file) {
@@ -59,6 +80,12 @@ export default function VirtualTryOn() {
     // In a real app, this would save the try-on result
     alert("Image downloaded successfully!");
   };
+  const activeOutfit = savedOutfits.find(
+  item => String(item.id) === String(selectedClothing)
+);
+console.log("Selected:", selectedClothing);
+console.log("Saved:", savedOutfits);
+console.log("Active:", activeOutfit);
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-purple-50 to-pink-50 flex flex-col">
@@ -194,33 +221,33 @@ Virtual Try-On
               </div>
 
               {/* Camera/Upload Area */}
-              <div className="relative h-96 bg-gradient-to-br from-purple-100 to-pink-100 rounded-xl border-2 border-dashed border-purple-200 overflow-hidden">
-                {isCameraActive ? (
-                  <div className="w-full h-full flex items-center justify-center">
-                    <div className="text-center">
-                      <div className="w-20 h-20 bg-gradient-to-r from-pink-400 to-purple-500 rounded-full flex items-center justify-center mx-auto mb-4">
-                        <Camera className="w-10 h-10 text-white" />
-                      </div>
-                      <p className="text-purple-700 font-medium">Camera Active</p>
-                      <p className="text-purple-500 text-sm mt-1">Point camera at yourself</p>
-                    </div>
-                    {/* In real app, video element would be here */}
-                    <video ref={videoRef} className="hidden" />
-                    <canvas ref={canvasRef} className="hidden" />
-                  </div>
-                ) : (
-                  <div className="w-full h-full flex flex-col items-center justify-center p-6">
-                    <div className="w-24 h-24 bg-gradient-to-r from-pink-400 to-purple-500 rounded-full flex items-center justify-center mb-4">
-                      <User className="w-12 h-12 text-white" />
-                    </div>
-                    <p className="text-purple-700 font-medium text-center mb-2">
-                      No camera active
-                    </p>
-                    <p className="text-purple-500 text-sm text-center mb-6">
-                      Start camera or upload a photo to begin virtual try-on
-                    </p>
-                  </div>
-                )}
+              <div className="relative h-96 rounded-xl border-2 border-dashed border-purple-200 overflow-hidden bg-black">
+{isCameraActive ? (
+  <>
+    <video
+  ref={videoRef}
+  playsInline
+  muted
+  autoPlay
+  className="absolute inset-0 w-full h-full object-cover"
+/>
+
+    {/* 🔥 Clothing Overlay */}
+
+  </>
+) : (
+  <div className="w-full h-full flex flex-col items-center justify-center p-6">
+    <div className="w-24 h-24 bg-gradient-to-r from-pink-400 to-purple-500 rounded-full flex items-center justify-center mb-4">
+      <User className="w-12 h-12 text-white" />
+    </div>
+    <p className="text-purple-700 font-medium text-center mb-2">
+      No camera active
+    </p>
+    <p className="text-purple-500 text-sm text-center mb-6">
+      Start camera or upload a photo to begin virtual try-on
+    </p>
+  </div>
+)}
 
                 {/* Controls Overlay */}
                 <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex gap-3">
@@ -313,11 +340,11 @@ Virtual Try-On
             <div className="bg-white rounded-2xl shadow-lg p-6 border border-purple-100">
               <div className="flex items-center justify-between mb-6">
                 <h2 className="text-xl font-semibold text-purple-800">Clothing Items</h2>
-                <span className="text-sm text-purple-500">{clothingItems.length} items</span>
+                <span className="text-sm text-purple-500">{savedOutfits.length} items</span>
               </div>
 
               <div className="grid grid-cols-2 gap-4">
-                {clothingItems.map((item) => (
+                {savedOutfits.map((item) => (
                   <div
                     key={item.id}
                     className={`group relative rounded-xl overflow-hidden border-2 transition-all duration-300 cursor-pointer ${
@@ -330,13 +357,13 @@ Virtual Try-On
                     <div className="aspect-square overflow-hidden">
                       <img
                         src={item.image}
-                        alt={item.name}
+alt="Generated outfit"
                         className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                       />
                     </div>
                     <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-3">
-                      <p className="text-white font-medium text-sm">{item.name}</p>
-                      <p className="text-purple-200 text-xs">{item.category}</p>
+                      <p className="text-white font-medium text-sm">{item.selections.style}</p>
+                      <p className="text-purple-200 text-xs">{item.selections.color}</p>
                     </div>
                     {selectedClothing === item.id && (
                       <div className="absolute top-2 right-2 w-6 h-6 bg-pink-500 rounded-full flex items-center justify-center">

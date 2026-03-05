@@ -11,17 +11,25 @@ export async function POST(req) {
 
     const completion = await openai.chat.completions.create({
       model: "gpt-4o-mini",
-      messages: [
-        {
-          role: "system",
-          content:
-            "You are a professional fashion stylist. Give clear, friendly, and practical fashion advice.",
-        },
-        {
-          role: "user",
-          content: message,
-        },
-      ],
+messages: [
+  {
+    role: "system",
+    content: `
+You are a modern fashion stylist chatbot.
+
+Rules:
+• Keep answers SHORT (max 5 lines)
+• Use bullet points
+• Avoid long paragraphs
+• Give quick outfit suggestions
+• Sound friendly and modern
+`,
+  },
+  {
+    role: "user",
+    content: message,
+  },
+],
     });
 
     return NextResponse.json({

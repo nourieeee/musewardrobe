@@ -129,9 +129,9 @@ Virtual Try-On
       </section>
 
       {/* Features Section */}
-<section className="py-16 px-6 max-w-6xl mx-auto grid md:grid-cols-3 gap-8">
+<section className="py-16 px-6 max-w-6xl mx-auto grid md:grid-cols-3 gap-8 items-stretch">
   <Link href="/generator" className="block">
-    <div className="bg-white/80 backdrop-blur-sm p-8 rounded-2xl shadow-lg border border-pink-100 text-center hover:shadow-xl transition-all duration-300 hover:transform hover:-translate-y-1 cursor-pointer">
+    <div className="bg-white/80 backdrop-blur-sm p-8 rounded-2xl shadow-lg border border-pink-100 text-center hover:shadow-xl transition-all duration-300 hover:-translate-y-1 cursor-pointer h-full flex flex-col justify-between">
       <div className="w-16 h-16 bg-gradient-to-r from-pink-400 to-purple-500 rounded-full flex items-center justify-center mx-auto mb-4">
         <span className="text-2xl">👗</span>
       </div>
@@ -143,7 +143,7 @@ Virtual Try-On
   </Link>
   
   <Link href="/chatbot" className="block">
-    <div className="bg-white/80 backdrop-blur-sm p-8 rounded-2xl shadow-lg border border-purple-100 text-center hover:shadow-xl transition-all duration-300 hover:transform hover:-translate-y-1 cursor-pointer">
+    <div className="bg-white/80 backdrop-blur-sm p-8 rounded-2xl shadow-lg border border-pink-100 text-center hover:shadow-xl transition-all duration-300 hover:-translate-y-1 cursor-pointer h-full flex flex-col justify-between">
       <div className="w-16 h-16 bg-gradient-to-r from-pink-400 to-purple-500 rounded-full flex items-center justify-center mx-auto mb-4">
         <span className="text-2xl">💬</span>
       </div>
@@ -155,7 +155,7 @@ Virtual Try-On
   </Link>
   
   <Link href="/dashboard" className="block">
-    <div className="bg-white/80 backdrop-blur-sm p-8 rounded-2xl shadow-lg border border-blue-100 text-center hover:shadow-xl transition-all duration-300 hover:transform hover:-translate-y-1 cursor-pointer">
+    <div className="bg-white/80 backdrop-blur-sm p-8 rounded-2xl shadow-lg border border-pink-100 text-center hover:shadow-xl transition-all duration-300 hover:-translate-y-1 cursor-pointer h-full flex flex-col justify-between">
       <div className="w-16 h-16 bg-gradient-to-r from-pink-400 to-purple-500 rounded-full flex items-center justify-center mx-auto mb-4">
         <span className="text-2xl">📊</span>
       </div>
@@ -167,7 +167,7 @@ Virtual Try-On
   </Link>
   
   <Link href="/about" className="block">
-    <div className="bg-white/80 backdrop-blur-sm p-8 rounded-2xl shadow-lg border border-pink-100 text-center hover:shadow-xl transition-all duration-300 hover:transform hover:-translate-y-1 cursor-pointer">
+    <div className="bg-white/80 backdrop-blur-sm p-8 rounded-2xl shadow-lg border border-pink-100 text-center hover:shadow-xl transition-all duration-300 hover:-translate-y-1 cursor-pointer h-full flex flex-col justify-between">
       <div className="w-16 h-16 bg-gradient-to-r from-pink-400 to-purple-500 rounded-full flex items-center justify-center mx-auto mb-4">
         <span className="text-2xl">👥</span>
       </div>
@@ -179,7 +179,7 @@ Virtual Try-On
   </Link>
   
   <Link href="/login" className="block">
-    <div className="bg-white/80 backdrop-blur-sm p-8 rounded-2xl shadow-lg border border-purple-100 text-center hover:shadow-xl transition-all duration-300 hover:transform hover:-translate-y-1 cursor-pointer">
+    <div className="bg-white/80 backdrop-blur-sm p-8 rounded-2xl shadow-lg border border-pink-100 text-center hover:shadow-xl transition-all duration-300 hover:-translate-y-1 cursor-pointer h-full flex flex-col justify-between">
       <div className="w-16 h-16 bg-gradient-to-r from-pink-400 to-purple-500 rounded-full flex items-center justify-center mx-auto mb-4">
         <span className="text-2xl">🔐</span>
       </div>

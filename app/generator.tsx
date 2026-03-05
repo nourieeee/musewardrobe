@@ -1,3 +1,4 @@
+"use client";
 import { useState } from "react";
 
 export default function Generator() {
@@ -18,24 +19,9 @@ export default function Generator() {
 };
 
 
-  const handleGenerate = async () => {
-    setLoading(true);
-
-    try {
-      const res = await fetch("/api/generate-image", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(form),
-      });
-
-      const data = await res.json();
-      setImage(data.imageUrl);
-    } catch (err) {
-      alert("AI generation failed");
-    }
-
-    setLoading(false);
-  };
+const handleGenerate = async () => {
+  alert("TEST WORKING");
+};
 
   return (
     <div className="max-w-4xl mx-auto p-6">
@@ -58,15 +44,15 @@ export default function Generator() {
         {loading ? "Generating..." : "Generate Outfit"}
       </button>
 
-      {image && (
-        <div className="mt-8">
-          <img
-            src={image}
-            alt="AI Generated Outfit"
-            className="rounded-xl shadow-md"
-          />
-        </div>
-      )}
+    {image && (
+  <div className="mt-8">
+    <img
+      src={image}
+      alt="AI Generated Outfit"
+      className="rounded-xl shadow-md"
+    />
+  </div>
+)}
     </div>
   );
 }
